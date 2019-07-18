@@ -73,13 +73,17 @@ class AuthService extends EventEmitter {
             return null;
         } else {
             try {
-                await this._getUser(token);
+                return instance._getUser(token);
             } catch (error) {
                 console.log(error);
                 localStorage.removeItem(ACCESS_TOKEN);
                 return null;
             }
         }
+    }
+
+    async logout() {
+        localStorage.removeItem(ACCESS_TOKEN);
     }
 
 }
