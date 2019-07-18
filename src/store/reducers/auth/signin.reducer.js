@@ -1,4 +1,4 @@
-import { SIGNIN_REQUESTED, SIGNIN_FAILED, SIGNIN_SUCCESS, SIGNIN_EMAIL_CHANGED, SIGNIN_PASSWORD_CHANGED } from "../../actions/auth/signin.action";
+import { SIGNIN_REQUESTED, SIGNIN_FAILED, SIGNIN_SUCCESS, SIGNIN_EMAIL_CHANGED, SIGNIN_PASSWORD_CHANGED } from "../../actions/auth";
 
 const initialState = {
     email: 'test1@test.gr',

@@ -43,7 +43,7 @@ class AuthService extends EventEmitter {
                 password,
             });
 
-            localStorage
+            // localStorage
 
             return res.data;
         } catch(error) {
