@@ -3,6 +3,7 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
 import createReducer from './reducers';
+import { CHECK_AUTH_STATE } from './actions/auth';
 
 /*
 Fix for Firefox redux dev tools extension
@@ -39,5 +40,7 @@ export const injectReducer = (key, reducer) => {
 };
 
 sagaMiddleware.run(rootSaga);
+
+store.dispatch({type: CHECK_AUTH_STATE})
 
 export default store;
