@@ -13,7 +13,7 @@ export function* getAuthStateInitializerWatcher() {
 
 function* logout() {
     yield authService.logout();
-    yield put(LOGGED_OUT_COMPLETE);
+    yield put({ type: LOGGED_OUT_COMPLETE });
 }
 
 export function* getLogoutWatcher() {

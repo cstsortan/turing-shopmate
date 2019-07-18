@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import styles from './styles';
 import Button from "@material-ui/core/Button";
 import * as alertActions from "../../../../store/actions/alerts";
+import * as authActions from "../../../../store/actions/auth";
 
 const links = [{
     title: 'Daily Deals',
@@ -27,36 +28,37 @@ class TopBar extends React.Component {
         const {
             classes,
             user,
-            isLoading
+            isLoading,
+            logout,
         } = this.props;
 
         return (
             <AppBar className={classes.topBar}>
                 <Toolbar className={classes.toolbar}>
                     {isLoading ? null : (!user ? <div className={classes.authText + ' ' + classes.divTopBar}>
-                            <span>Hi!</span>
-                            <Link onClick={() => {
-                              this.props.showAuth(false)
-                              }} className={classes.authLink} id="btnSignIn" style={{color: 'red'}}>
-                              Sign in
-                            </Link>
-                            <span>or</span>
-                            <Link onClick={() => {
-                              this.props.showAuth(true)
-                              }} className={classes.authLink} id="btnRegister" style={{color: 'red'}}>
-                              Register
-                          </Link>
+                        <span>Hi!</span>
+                        <Link onClick={() => {
+                            this.props.showAuth(false)
+                            }} className={classes.authLink} id="btnSignIn" style={{color: 'red'}}>
+                            Sign in
+                        </Link>
+                        <span>or</span>
+                        <Link onClick={() => {
+                            this.props.showAuth(true)
+                            }} className={classes.authLink} id="btnRegister" style={{color: 'red'}}>
+                            Register
+                        </Link>
                     </div>
                     :
                     <div className={classes.authText + ' ' + classes.divTopBar}>
-                            <span>Hi {user.name}</span>
-                            <Link className={classes.authLink} style={{color: 'red'}}>
-                            My Profile
-                            </Link>
-                            <span>|</span>
-                            <Link className={classes.authLink} id="btnLogout" style={{color: 'red'}}>
-                             Logout
-                            </Link>
+                        <span>Hi {user.name}</span>
+                        <Link className={classes.authLink} style={{color: 'red'}}>
+                        My Profile
+                        </Link>
+                        <span>|</span>
+                        <Link onClick={logout} className={classes.authLink} id="btnLogout" style={{color: 'red'}}>
+                            Logout
+                        </Link>
                     </div>)}
                     <Hidden mdDown className={classes.divTopBar}>
                         <div className={classes.linksContainer}>
@@ -113,7 +115,8 @@ function mapStateToProps({auth}) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         showCart: alertActions.showCart,
-        showAuth: alertActions.showAuth
+        showAuth: alertActions.showAuth,
+        logout: authActions.requestLogout,
     }, dispatch);
 }
 

@@ -7,4 +7,9 @@ export const changeAuthState = (payload) => ({
 export const CHECK_AUTH_STATE = 'CHECK_AUTH_STATE';
 
 export const REQUEST_LOGOUT = 'REQUEST_LOGOUT';
+export const requestLogout = (payload) => ({
+    type: REQUEST_LOGOUT,
+    payload
+});
+
 export const LOGGED_OUT_COMPLETE = 'LOGGED_OUT_COMPLETE';
