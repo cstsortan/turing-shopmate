@@ -2,6 +2,8 @@ import { EventEmitter } from "events";
 import axios from 'axios';
 import systemConfig from '../config/system';
 
+const ACCESS_TOKEN = "accessToken";
+
 class AuthService extends EventEmitter {
     constructor() {
         super();
@@ -20,7 +22,7 @@ class AuthService extends EventEmitter {
                 email,
                 password,
             });
-
+            localStorage.setItem(ACCESS_TOKEN, res.data.accessToken);
             return res.data;
 
         } catch (error) {
@@ -41,17 +43,19 @@ class AuthService extends EventEmitter {
                 password,
             });
 
+            localStorage
+
             return res.data;
         } catch(error) {
             throw error.response.data.error;
         }
     }
 
-    async getCurrentUser() {
+    async _getUser(token) {
         try {
             const res = await axios.get(systemConfig.serverBaseUrl + "/customer", {
                 headers: {
-                    "user-key": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6NDk0MTcsIm5hbWUiOiJDaHJpc3RvcyIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTU2MzM5NTczMiwiZXhwIjoxNTYzNDgyMTMyfQ.Da3-XHLha0yf7GeKB-Fduvpa9jMDVTz_AuXk_a1sNFQ",
+                    "user-key": token,
                 }
             });
 
@@ -61,6 +65,22 @@ class AuthService extends EventEmitter {
         }
     }
 
+    async getCurrentUser() {
+
+        const token = localStorage.getItem(ACCESS_TOKEN);
+
+        if (!token) {
+            return null;
+        } else {
+            try {
+                await this._getUser(token);
+            } catch (error) {
+                console.log(error);
+                localStorage.removeItem(ACCESS_TOKEN);
+                return null;
+            }
+        }
+    }
 
 }
 
