@@ -37,6 +37,7 @@ export default (state = initialState, { type, payload }) => {
         }
         return {
             ...state,
+            error: null,
             isLoading: true,
         }
     } else if (type === REGISTER_SUCCESSFUL) {

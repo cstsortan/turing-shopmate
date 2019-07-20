@@ -43,7 +43,7 @@ class AuthService extends EventEmitter {
                 password,
             });
 
-            // localStorage
+            localStorage.setItem(ACCESS_TOKEN, res.data.accessToken);
 
             return res.data;
         } catch(error) {
