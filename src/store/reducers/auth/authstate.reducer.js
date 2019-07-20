@@ -3,6 +3,7 @@ import { AUTH_STATE_CHANGED, LOGGED_OUT_COMPLETE, REQUEST_LOGOUT } from "../../a
 const initialState = {
     isLoading: true,
     user: null,
+    token: null,
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -12,13 +13,15 @@ export default (state = initialState, { type, payload }) => {
         return {
             ...state,
             isLoading: false,
-            user: payload,
+            user: payload.user,
+            token: payload.token,
         };
 
     case REQUEST_LOGOUT:
         return {
             ...state,
             isLoading: true,
+            token: null,
         };
 
     case LOGGED_OUT_COMPLETE:

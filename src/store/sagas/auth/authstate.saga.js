@@ -3,8 +3,11 @@ import authService from '../../../services/authService';
 import { changeAuthState, CHECK_AUTH_STATE, REQUEST_LOGOUT, LOGGED_OUT_COMPLETE } from "../../actions/auth";
 
 function* initializeAuthState(action) {
-    const authState = yield call(authService.getCurrentUser);
-    yield put(changeAuthState(authState));
+    const {
+        user,
+        token
+    } = yield call(authService.getCurrentUser);
+    yield put(changeAuthState({user, token}));
 }
 
 export function* getAuthStateInitializerWatcher() {

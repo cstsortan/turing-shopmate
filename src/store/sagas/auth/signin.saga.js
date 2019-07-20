@@ -9,7 +9,7 @@ function* signInSaga(action) {
         const { email, password } = action.payload;
         const data = yield call(authService.signIn, email, password);
         yield put(signinSuccess(data));
-        yield put(changeAuthState(data.customer));
+        yield put(changeAuthState({user: data.customer, token: data.accessToken}));
         yield put(hideAuth());
     } catch (error) {
         yield put({
