@@ -11,8 +11,12 @@ class AttributesService {
     getAttributes = async () => {
         try {
             const attributes = await this._getAttributes();
-            return Promise.all([...attributes].map(attribute => {
-                return this.getAttributeValues(attribute.attribute_id);
+            return Promise.all([...attributes].map(async attribute => {
+                const values = await this.getAttributeValues(attribute.attribute_id);
+                return {
+                    ...attribute,
+                    values,
+                }
             }))
         } catch (error) {
             throw error.response || error;
