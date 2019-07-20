@@ -7,6 +7,7 @@ function* getProductsInDepartment({payload}) {
     try {
         const res = yield call(productsService.getProductsInCategory, {category_id: categoryId});
         yield put(actions.getProductsInDepartmentSuccess(res));
+        yield put(actions.selectCategory(payload));
     } catch (error) {
         yield put(actions.getProductsInDepartmentError());
     }

@@ -67,14 +67,14 @@ class Home extends Component {
                                             </span>
                                             </div>
                                             <div className={classes.filterItems}>
-                                              <div className="py-1">
+                                              {this.props.categoryId && <div className="py-1">
                                                 <span className={classes.isGrey}>Category: </span>
-                                                <span>Regional</span>
-                                              </div>
-                                              <div className="py-1 pb-2">
+                                                <span>{this.props.categories[this.props.categoryId].name}</span>
+                                              </div>}
+                                              {this.props.departmentId && <div className="py-1 pb-2">
                                                 <span className={classes.isGrey}>Department: </span>
-                                                <span>French</span>
-                                              </div>
+                                                <span>{this.props.departments[this.props.departmentId].name}</span>
+                                              </div>}
                                             </div>
                                         </div>
                                         <div className={classes.filterBodyContainer}>
@@ -260,6 +260,10 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps({products, categories, departments}) {
     return {
         products: products.all.data.rows,
+        departmentId: categories.selectedCategory.departmentId,
+        categoryId: categories.selectedCategory.categoryId,
+        departments: categories.allCategories.departments,
+        categories: categories.allCategories.categories
     }
 }
 
