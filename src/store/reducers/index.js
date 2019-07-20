@@ -4,6 +4,7 @@ import products from './products';
 import product from './product';
 import auth from './auth';
 import categories from './categories';
+import attributes from './attributes';
 
 const createReducer = (asyncReducers) =>
     combineReducers({
@@ -12,6 +13,7 @@ const createReducer = (asyncReducers) =>
         product,
         auth,
         categories,
+        attributes,
         ...asyncReducers
     });
 
