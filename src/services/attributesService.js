@@ -12,7 +12,7 @@ class AttributesService {
         try {
             const attributes = await this._getAttributes();
             return Promise.all([...attributes].map(async attribute => {
-                const values = await this.getAttributeValues(attribute.attribute_id);
+                const values = await this._getAttributeValues(attribute.attribute_id);
                 return {
                     ...attribute,
                     values,
@@ -35,7 +35,7 @@ class AttributesService {
 
     _getAttributeValues = async (attribute_id) => {
         try {
-            const res = await axios.get(`${systemConfig.serverBaseUrl}/values/${attribute_id}`);
+            const res = await axios.get(`${systemConfig.serverBaseUrl}/${ATTRIBUTES}/values/${attribute_id}`);
             return res.data;
         } catch (error) {
             throw error.response;

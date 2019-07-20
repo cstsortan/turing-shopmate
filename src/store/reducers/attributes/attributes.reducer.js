@@ -16,7 +16,7 @@ export default (state = initialState, { type, payload }) => {
             error: null,
         }
     
-    case actions.FETCH_ALL_CATEGORIES_SUCCESS:
+    case actions.FETCH_ATTRIBUTES_SUCCESS:
         return {
             ...state,
             isLoading: false,
@@ -24,7 +24,7 @@ export default (state = initialState, { type, payload }) => {
             error: null,
         }
 
-    case actions.FETCH_ALL_CATEGORIES_FAILED:
+    case actions.FETCH_ATTRIBUTES_FAILED:
         return {
             ...state,
             isLoading: false,

@@ -80,105 +80,30 @@ class Home extends Component {
                                         </div>
                                     </div>
                                     <div className={classes.filterBodyContainer}>
-                                        <div className={classes.colorBlock}>
-                                            <div className={classes.titleContainer}>
-                                                <span className={classes.controlsTitle}>
-                                                    Color
-                                              </span>
-                                            </div>
-                                            <div className={classes.colorRadiosContainer}>
-                                                <Radio
-                                                    style={{ padding: 0, color: '#6eb2fb' }}
-                                                    size="small"
-                                                    icon={<FiberManualRecord />}
-                                                    value="a"
-                                                    name="radio-button-demo"
-                                                    aria-label="A"
-                                                />
-                                                <Radio
-                                                    style={{ padding: 0, color: '#00d3ca' }}
-                                                    size="small"
-                                                    icon={<FiberManualRecord />}
-                                                    value="b"
-                                                    name="radio-button-demo"
-                                                    aria-label="B"
-                                                />
-                                                <Radio
-                                                    style={{ padding: 0, color: '#f62f5e' }}
-                                                    size="small"
-                                                    icon={<FiberManualRecord />}
-                                                    value="c"
-                                                    name="radio-button-demo"
-                                                    aria-label="C"
-                                                />
-                                                <Radio
-                                                    style={{ padding: 0, color: '#fe5c07' }}
-                                                    size="small"
-                                                    icon={<FiberManualRecord />}
-                                                    value="d"
-                                                    name="radio-button-demo"
-                                                    aria-label="D"
-                                                />
-                                                <Radio
-                                                    style={{ padding: 0, color: '#f8e71c' }}
-                                                    size="small"
-                                                    icon={<FiberManualRecord />}
-                                                    value="e"
-                                                    name="radio-button-demo"
-                                                    aria-label="E"
-                                                />
-                                                <Radio
-                                                    style={{ padding: 0, color: '#7ed321' }}
-                                                    size="small"
-                                                    icon={<FiberManualRecord />}
-                                                    value="f"
-                                                    name="radio-button-demo"
-                                                    aria-label="F"
-                                                />
-                                                <Radio
-                                                    style={{ padding: 0, color: '#9013fe' }}
-                                                    size="small"
-                                                    icon={<FiberManualRecord />}
-                                                    value="g"
-                                                    name="radio-button-demo"
-                                                    aria-label="G"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className={classes.sizesBlock}>
-                                            <div className={classes.titleContainer}>
-                                                <span className={classes.controlsTitle}>
-                                                    Size
-                                                </span>
-                                            </div>
-                                            <div className={classes.sizeCheckboxes}>
-                                                <Checkbox
-                                                    style={{ padding: 0 }}
-                                                    checkedIcon={<div className={classes.sizeCheckboxChecked}>XS</div>}
-                                                    icon={<div className={classes.sizeCheckboxUnchecked}>XS</div>}
-                                                    value="XS" />
-                                                <Checkbox
-                                                    style={{ padding: 0 }}
-                                                    checkedIcon={<div className={classes.sizeCheckboxChecked}>S</div>}
-                                                    icon={<div className={classes.sizeCheckboxUnchecked}>S</div>}
-                                                    value="checkedA" />
-                                                <Checkbox
-                                                    style={{ padding: 0 }}
-                                                    checkedIcon={<div className={classes.sizeCheckboxChecked}>M</div>}
-                                                    icon={<div className={classes.sizeCheckboxUnchecked}>M</div>}
-                                                    value="M" />
-                                                <Checkbox
-                                                    style={{ padding: 0 }}
-                                                    checkedIcon={<div className={classes.sizeCheckboxChecked}>L</div>}
-                                                    icon={<div className={classes.sizeCheckboxUnchecked}>L</div>}
-                                                    value="L" />
-                                                <Checkbox
-                                                    style={{ padding: 0 }}
-                                                    checkedIcon={<div className={classes.sizeCheckboxChecked}>XL</div>}
-                                                    icon={<div className={classes.sizeCheckboxUnchecked}>XL</div>}
-                                                    value="XL" />
-                                            </div>
-                                        </div>
+                                        {
+                                            this.props.attributes.map(attribute => {
+                                                return <div key={attribute.attribute_id} className={classes.sizesBlock}>
+                                                    <div className={classes.titleContainer}>
+                                                        <span className={classes.controlsTitle}>
+                                                            {attribute.name}
+                                                        </span>
+                                                    </div>
+                                                    <div className={classes.sizeCheckboxes}>
+                                                        {
+                                                            attribute.values.map(attributeValue => {
+                                                                return <Checkbox
+                                                                key={attributeValue.attribute_value_id}
+                                                                style={{ padding: 0 }}
+                                                                checkedIcon={<div className={classes.sizeCheckboxChecked}>{attributeValue.value}</div>}
+                                                                icon={<div className={classes.sizeCheckboxUnchecked}>{attributeValue.value}</div>}
+                                                                value={attributeValue.attribute_value_id} 
+                                                                />
+                                                            })
+                                                        }
+                                                    </div>
+                                                </div>
+                                            })
+                                        }
                                         <div className={classes.sliderBlock}>
                                             <div className={classes.titleContainer}>
                                                 <span className={classes.controlsTitle}>

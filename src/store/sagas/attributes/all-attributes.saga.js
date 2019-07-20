@@ -5,9 +5,9 @@ import attributesService from '../../../services/attributesService';
 function* fetchAllAttributes() {
     try {
         const data = yield call(attributesService.getAttributes);
-        put(actions.fetchAttributesSuccess(data));
+        yield put(actions.fetchAttributesSuccess(data));
     } catch (error) {
-        put(actions.fetchAttributesError(error));
+        yield put(actions.fetchAttributesError(error));
     }
 }
 
