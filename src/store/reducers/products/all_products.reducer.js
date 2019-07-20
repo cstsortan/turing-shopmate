@@ -36,6 +36,30 @@ const allProductsReducer = function (state = initialState, action) {
                 error: action.payload
             };
         }
+        case Actions.GET_PRODUCTS_IN_DEPARTMENT:
+            return {
+                ...state,
+                isLoading: true,
+                error: false,
+            };
+        case Actions.GET_PRODUCTS_IN_DEPARTMENT_ERROR:
+            return {
+                ...state,
+                isLoading: false,
+                error: true,
+            };
+        case Actions.GET_PRODUCTS_IN_DEPARTMENT_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                error: false,
+                data: {
+                    ...action.payload,
+                    rows: [
+                        ...action.payload.rows,
+                    ]
+                },
+            }
         default:
         {
             return state;

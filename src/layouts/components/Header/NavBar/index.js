@@ -10,7 +10,7 @@ import {
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import styles from './styles';
-import * as alertActions from "../../../../store/actions/alerts";
+import * as actions from "../../../../store/actions";
 import './style.css';
 
 class NavBar extends React.Component {
@@ -36,6 +36,10 @@ class NavBar extends React.Component {
                 })
             }
         });
+    }
+
+    categorySelected = (departmentId, categoryId) => {
+        this.props.getProductsInDepartment({ departmentId, categoryId });
     }
 
     render() {
@@ -64,7 +68,7 @@ class NavBar extends React.Component {
                                     const department = departments[department_id];
                                     return <NavDropdown key={department_id} title={department.name}>
                                         {department.categories.map(category => {
-                                            return <NavDropdown.Item key={category.category_id}>
+                                            return <NavDropdown.Item key={category.category_id} onClick={() => this.categorySelected(department_id, category.category_id)}>
                                                 {category.name}
                                             </NavDropdown.Item>
                                         })}
@@ -152,7 +156,8 @@ NavBar.propTypes = {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        showCart: alertActions.showCart
+        showCart: actions.showCart,
+        getProductsInDepartment: actions.getProductsInDepartment,
     }, dispatch);
 }
 
